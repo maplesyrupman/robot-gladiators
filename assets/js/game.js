@@ -169,19 +169,20 @@ const endGame = () => {
 
 const shop = () => {
   let shopOptionPrompt = window.prompt(
-    'Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: \'REFIll\', \'UPGRADE\', or \'LEAVE\' to make a choice.'
+    'Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 1 to \'REFIll\', 2 to \'UPGRADE\', or 3 to \'LEAVE\' to make a choice.'
   ).toLowerCase();
+  shopOptionPrompt = parseInt(shopOptionPrompt);
 
   switch (shopOptionPrompt) {
-    case 'refill':
+    case 1:
       playerInfo.refillHealth();
       break;
 
-    case 'upgrade':
+    case 2:
       playerInfo.upgradeAttack();
       break;
 
-    case 'leave':
+    case 3:
       window.alert('Leaving the store.');
       break;
 
