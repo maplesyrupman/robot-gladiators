@@ -1,5 +1,14 @@
+const getPlayerName = () => {
+  let name = '';
+  while (name === '' || name === null) {
+    name = prompt('What is your robot\'s name?');
+  }
+  console.log('Your robot\'s name is' + name);
+  return name;
+}
+
 let playerInfo = {
-  name: prompt('What is your robot\'s name?'),
+  name: getPlayerName(),
   health: 100, 
   attack: 10,
   money: 10,
@@ -78,7 +87,7 @@ var fight = function (enemy) {
       window.alert(enemy.name + ' has died!');
 
       // award player money for winning
-      playerInfo.money = playerInfo.money + 20;
+      playerInfo.money += 20;
 
       // leave while() loop since enemy is dead
       break;
