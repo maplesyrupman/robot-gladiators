@@ -73,9 +73,6 @@ const fightOrSkip = () => {
   return false;
 }
 
-const playerAttack = (enemyRobot) => {
-  fightOrSkip();
-}
 
 // fight function (now with parameter for enemy's name)
 var fight = function (enemy) {
@@ -83,29 +80,32 @@ var fight = function (enemy) {
 
   while (playerInfo.health > 0 && enemy.health > 0) {
     // ask player if they'd like to fight or run
-    if (fightOrSkip()) {
-      break;
-    }
+    if (isPlayerTurn) {
 
-    // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
-    var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
-    enemy.health = Math.max(0, enemy.health - damage);
-    console.log(
-      playerInfo.name + ' attacked ' + enemy.name + '. ' + enemy.name + ' now has ' + enemy.health + ' health remaining.'
-    );
-
-    // check enemy's health
-    if (enemy.health <= 0) {
-      window.alert(enemy.name + ' has died!');
-
-      // award player money for winning
-      playerInfo.money += 20;
-
-      // leave while() loop since enemy is dead
-      break;
+      if (fightOrSkip()) {
+        break;
+      }
+  
+      // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
+      var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+      enemy.health = Math.max(0, enemy.health - damage);
+      console.log(
+        playerInfo.name + ' attacked ' + enemy.name + '. ' + enemy.name + ' now has ' + enemy.health + ' health remaining.'
+      );
+  
+      // check enemy's health
+      if (enemy.health <= 0) {
+        window.alert(enemy.name + ' has died!');
+  
+        // award player money for winning
+        playerInfo.money += 20;
+  
+        // leave while() loop since enemy is dead
+        break;
+      } else {
+        window.alert(enemy.name + ' still has ' + enemy.health + ' health left.');
+      }
     } else {
-      window.alert(enemy.name + ' still has ' + enemy.health + ' health left.');
-    }
 
     // remove players's health by subtracting the amount set in the enemy.attack variable
     var damage = randomNumber(enemy.attack - 3, enemy.attack);
@@ -122,6 +122,8 @@ var fight = function (enemy) {
     } else {
       window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.');
     }
+    }
+    isPlayerTurn = !isPlayerTurn;
   }
 };
 
