@@ -66,17 +66,26 @@ const fightOrSkip = () => {
 
     if (confirmSkip) {
       alert(`${playerInfo.name} has decided to skip this fight. Goodbye!`);
-      playerInfo.money -= 10;
-      shop();
+      playerInfo.money -= Math.max(0, playerInfo.money - 10);
+      return true;
     }
   }
+  return false;
+}
+
+const playerAttack = (enemyRobot) => {
+  fightOrSkip();
 }
 
 // fight function (now with parameter for enemy's name)
 var fight = function (enemy) {
+  let isPlayerTurn = (Math.random() > 0.5) ? true : false;
+
   while (playerInfo.health > 0 && enemy.health > 0) {
     // ask player if they'd like to fight or run
-    fightOrSkip();
+    if (fightOrSkip()) {
+      break;
+    }
 
     // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
