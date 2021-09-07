@@ -162,6 +162,15 @@ const startGame = () => {
 const endGame = () => {
   if (playerInfo.health > 0) {
     window.alert(`Great job!, you've survived the game! You now have a score of ${playerInfo.money}`);
+    // enter highscore logic below
+    let currentHighScore = (localStorage.getItem('highScore') === null) ? 0 : parseInt(localStorage.getItem('highScore'));
+    if (playerInfo.money < currentHighScore) {
+      alert(`${playerInfo.name} did not beat the high score of ${currentHighScore}. Better luck next time!`);
+    } else {
+      localStorage.setItem('highScore', playerInfo.money);
+      localStorage.setItem('highScorePlayer', playerInfo.name);
+      alert(`${playerInfo.name} now has the high score of ${playerInfo.money}!`)
+    }
   }
   else {
     window.alert('You\'ve lost your robot in battle.');
